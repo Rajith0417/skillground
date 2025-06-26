@@ -32,9 +32,12 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/video.js/dist/video-js.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/video.js/dist/video.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -91,9 +94,12 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/video.js/dist/video-js.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/video.js/dist/video.js"
+            ]
           }
         }
       }
