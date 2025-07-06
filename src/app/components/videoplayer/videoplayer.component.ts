@@ -1,5 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { VideoService } from '../../services/video.service';
+import { Component, ElementRef, Input, input, OnInit, ViewChild } from '@angular/core';
 import { Video } from '../models/video.model';
 import videojs from 'video.js'
 import type Player from 'video.js/dist/types/player';
@@ -13,17 +12,14 @@ import type Player from 'video.js/dist/types/player';
 })
 export class VideoplayerComponent implements OnInit{
 
-  videos:Video[] = [];
   player!: Player;
+  @Input() video: Video | undefined;
   @ViewChild('target', { static: false }) target!: ElementRef;
 
-  constructor(private videoService: VideoService){}
+  constructor(){}
 
   ngOnInit(): void {
-    this.videoService.getVideos().subscribe(response => {
-      this.videos = response;
-      console.log(response);
-    });
+
   }
 
   ngAfterViewInit(): void {
