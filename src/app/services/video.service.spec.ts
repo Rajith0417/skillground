@@ -23,7 +23,7 @@ describe('VideoService', () => {
     const spy = jasmine.createSpyObj('VideoService', ['getVideos']);
 
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [],
       providers: [{ provide: VideoService, useValue: spy }],
       declarations: [VideoplayerComponent],
     }).compileComponents();

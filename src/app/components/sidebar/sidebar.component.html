@@ -8,19 +8,41 @@
     </mat-form-field>
   </form> -->
 
-  <mat-list role="list">
-    @for (video of videos; track $index) {
-      <mat-list-item role="listitem">
-        <mat-icon>play_arrow</mat-icon>
-        <mat-icon>pause</mat-icon>
-        <span class="text">{{video.title}}</span>
-      </mat-list-item>
-    }
-  </mat-list>
+  <!-- Loading state -->
+  @if (loading$ | async) {
+    <div class="loading">Loading videos...</div>
+  }
 
-  <mat-paginator [length]="100"
-    [pageSize]="6"
-    aria-label="Select page">
-</mat-paginator>
+  <!-- Error state -->
+  @if (error$ | async; as error) {
+    <div class="error">Error loading videos: {{ error }}</div>
+  }
+
+  <!-- Video list -->
+  @if (videos$ | async; as videos) {
+    <mat-list role="list">
+      @for (video of videos; track video.id) {
+        <mat-list-item
+          role="listitem"
+          (click)="selectVideo(video.id)"
+          class="video-item"
+          [ngClass]="{ 'selected': video.id === (selectedVideoId$ | async) }"
+        >
+          @if (video.id === (selectedVideoId$ | async)) {
+            <mat-icon [hidden]="video.id === (selectedVideoId$ | async)">pause</mat-icon>
+          }
+          @else {
+            <mat-icon [hidden]="video.id === (selectedVideoId$ | async)">play_arrow</mat-icon>
+          }
+          <span class="text">{{video.title}}</span>
+        </mat-list-item>
+      }
+    </mat-list>
+
+    <mat-paginator [length]="videos.length"
+      [pageSize]="6"
+      aria-label="Select page">
+    </mat-paginator>
+  }
 
 </aside>
