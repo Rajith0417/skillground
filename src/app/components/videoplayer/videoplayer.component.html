@@ -7,8 +7,6 @@
       class="video-js vjs-default-skin"
       controls
       preload="auto"
-      width="640"
-      height="264"
       data-setup="{}">
       @for (source of video.sources; track $index) {
         <source [src]="source" type="video/mp4" />

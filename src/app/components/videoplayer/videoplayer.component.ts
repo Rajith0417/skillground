@@ -16,14 +16,28 @@ import { CommonModule } from '@angular/common';
 export class VideoplayerComponent implements OnInit, OnDestroy{
 
   player!: Player;
-  @ViewChild('target', { static: false }) target!: ElementRef;
-  
+  @ViewChild('target', { static: false }) target!: ElementRef<HTMLVideoElement>;
+
   selectedVideo$!: Observable<Video | null>;
 
   constructor(private videoStoreService: VideoStoreService){}
 
   ngOnInit(): void {
     this.selectedVideo$ = this.videoStoreService.getSelectedVideo$();
+    this.selectedVideo$.subscribe(video => {
+    if (video && this.target?.nativeElement) {
+      const videoEl = this.target.nativeElement;
+
+      // pause if playing
+      videoEl.pause();
+
+      // reload video with new sources
+      videoEl.load();
+
+      // play automatically
+      // videoEl.play();
+    }
+  });
   }
 
   ngAfterViewInit(): void {
