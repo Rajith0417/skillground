@@ -1,12 +1,13 @@
 <aside>
-
-  <!-- <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <mat-label>Search</mat-label>
-      <input type="text" matInput>
-      <mat-icon matSuffix>search</mat-icon>
+  <form class="search-form" (submit)="$event.preventDefault()">
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Search videos</mat-label>
+      <input matInput [(ngModel)]="searchTerm" name="searchTerm" placeholder="Type to search..." (ngModelChange)="onSearchTermChange($event)">
+      <button *ngIf="searchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
+        <mat-icon>close</mat-icon>
+      </button>
     </mat-form-field>
-  </form> -->
+  </form>
 
   <!-- Loading state -->
   @if (loading$ | async) {
@@ -19,21 +20,12 @@
   }
 
   <!-- Video list -->
-  @if (videos$ | async; as videos) {
+  @if (filteredVideos$ | async; as videos) {
     <mat-list role="list">
       @for (video of videos; track video.id) {
-        <mat-list-item
-          role="listitem"
-          (click)="selectVideo(video.id)"
-          class="video-item"
-          [ngClass]="{ 'selected': video.id === (selectedVideoId$ | async) }"
-        >
-          @if (video.id === (selectedVideoId$ | async)) {
-            <mat-icon [hidden]="video.id === (selectedVideoId$ | async)">pause</mat-icon>
-          }
-          @else {
-            <mat-icon [hidden]="video.id === (selectedVideoId$ | async)">play_arrow</mat-icon>
-          }
+        <mat-list-item role="listitem" [routerLink]="['/video', video.id]" (click)="selectVideo(video.id)" class="video-item" [ngClass]="{ 'selected': (selectedVideoId$ | async) === video.id }">
+          <mat-icon *ngIf="(selectedVideoId$ | async) === video.id">pause</mat-icon>
+          <mat-icon *ngIf="(selectedVideoId$ | async) !== video.id">play_arrow</mat-icon>
           <span class="text">{{video.title}}</span>
         </mat-list-item>
       }
