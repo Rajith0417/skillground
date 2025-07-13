@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { VideoService } from '../../services/video.service';
@@ -12,11 +12,12 @@ import { VideoResponse } from '../models/videoResponse.model';
 import { VideoStoreService } from '../../services/video-store.service';
 import { Observable, combineLatest, startWith, map, BehaviorSubject } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [MatButtonModule, MatListModule, MatPaginatorModule, MatIconModule, MatFormFieldModule, FormsModule, CommonModule, RouterModule],
+  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatListModule, MatPaginatorModule, MatIconModule, FormsModule, CommonModule, RouterModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })

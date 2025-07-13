@@ -1,8 +1,8 @@
 <aside>
   <form class="search-form" (submit)="$event.preventDefault()">
-    <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Search videos</mat-label>
-      <input matInput [(ngModel)]="searchTerm" name="searchTerm" placeholder="Type to search..." (ngModelChange)="onSearchTermChange($event)">
+    <mat-form-field class="example-full-width">
+      <!-- <mat-label>Search videos</mat-label> -->
+      <input matInput [(ngModel)]="searchTerm" name="searchTerm" placeholder="Search" (ngModelChange)="onSearchTermChange($event)">
       <button *ngIf="searchTerm" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
         <mat-icon>close</mat-icon>
       </button>
