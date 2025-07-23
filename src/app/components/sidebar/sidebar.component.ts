@@ -15,11 +15,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'app-sidebar',
-  standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatListModule, MatPaginatorModule, MatIconModule, FormsModule, CommonModule, RouterModule],
-  templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+    selector: 'app-sidebar',
+    imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatListModule, MatPaginatorModule, MatIconModule, FormsModule, CommonModule, RouterModule],
+    templateUrl: './sidebar.component.html',
+    styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent implements OnInit{
 

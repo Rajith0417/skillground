@@ -8,10 +8,10 @@ import * as VideoActions from '../actions/video.actions';
 @Injectable()
 export class VideoEffects {
 
-  loadVideos$ = createEffect(() => 
+  loadVideos$ = createEffect(() =>
     this.actions$.pipe(
       ofType(VideoActions.loadVideos),
-      mergeMap(() => 
+      mergeMap(() =>
         this.videoService.getVideos().pipe(
           map(data => VideoActions.loadVideosSuccess({ data })),
           catchError(error => of(VideoActions.loadVideosFailure({ error })))
@@ -24,4 +24,4 @@ export class VideoEffects {
     private actions$: Actions,
     private videoService: VideoService
   ) {}
-} 
+}

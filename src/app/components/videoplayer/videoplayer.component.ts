@@ -9,11 +9,10 @@ import { ActivatedRoute } from '@angular/router';
 import log from 'video.js/dist/types/utils/log';
 
 @Component({
-  selector: 'app-videoplayer',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './videoplayer.component.html',
-  styleUrl: './videoplayer.component.scss'
+    selector: 'app-videoplayer',
+    imports: [CommonModule],
+    templateUrl: './videoplayer.component.html',
+    styleUrl: './videoplayer.component.scss'
 })
 export class VideoplayerComponent implements OnInit, OnDestroy{
 
