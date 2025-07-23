@@ -1,0 +1,50 @@
+name: Build and Deploy Angular App
+
+on:
+  push:
+    branches:
+      - main  # or your default branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🟢 Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: 📦 Clean install (workaround for Rollup bug)
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
+
+      - name: ✅ Run tests
+        run: npm run test -- --watch=false --browsers=ChromeHeadless
+        continue-on-error: false  # Fail the workflow if tests fail
+
+      - name: 🛠️ Build Angular app
+        # run: npm run build -- --configuration production --base-href=/cicd/
+        run: npm run build -- --configuration production --base-href=/
+        
+      - name: 🚀 Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages           # The branch the action should deploy to.
+          folder: dist/cicd/browser  # The folder the action should deploy.
+          token: ${{ secrets.skillground }}
+
+      - name: ☁️ Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-north-1 # Change this to your region (e.g., us-east-1)
+
+      # - name: 📤 Deploy to S3
+      #   run: |
+      #     aws s3 sync dist/cicd/browser s3://cicd-rajith-angular --delete
