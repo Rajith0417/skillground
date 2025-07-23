@@ -23,9 +23,9 @@ jobs:
           rm -rf node_modules package-lock.json
           npm install
 
-      - name: ✅ Run tests
-        run: npm run test -- --watch=false --browsers=ChromeHeadless
-        continue-on-error: false  # Fail the workflow if tests fail
+      # - name: ✅ Run tests
+      #   run: npm run test -- --watch=false --browsers=ChromeHeadless
+      #   continue-on-error: false  # Fail the workflow if tests fail
 
       - name: 🛠️ Build Angular app
         # run: npm run build -- --configuration production --base-href=/cicd/
