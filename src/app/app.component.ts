@@ -13,7 +13,8 @@ import { Store } from '@ngrx/store';
     selector: 'app-root',
     imports: [RouterOutlet, HeaderComponent, SidebarComponent],
     templateUrl: './app.component.html',
-    styleUrl: './app.component.scss'
+    styleUrl: './app.component.scss',
+    standalone: true,
 })
 export class AppComponent implements OnInit {
   title = 'skillGround';
@@ -30,7 +31,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     // Manually load videos since effects are disabled
     this.store.dispatch(VideoActions.loadVideos());
-    
+
     // Load videos directly using the service
     this.videoService.getVideos().subscribe({
       next: (data) => {

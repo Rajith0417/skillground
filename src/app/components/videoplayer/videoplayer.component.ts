@@ -12,7 +12,8 @@ import log from 'video.js/dist/types/utils/log';
     selector: 'app-videoplayer',
     imports: [CommonModule],
     templateUrl: './videoplayer.component.html',
-    styleUrl: './videoplayer.component.scss'
+    styleUrl: './videoplayer.component.scss',
+    standalone: true,
 })
 export class VideoplayerComponent implements OnInit, OnDestroy{
 

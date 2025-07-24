@@ -19,7 +19,8 @@ import log from 'video.js/dist/types/utils/log';
     selector: 'app-sidebar',
     imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatListModule, MatPaginatorModule, MatIconModule, FormsModule, CommonModule, RouterModule],
     templateUrl: './sidebar.component.html',
-    styleUrl: './sidebar.component.scss'
+    styleUrl: './sidebar.component.scss',
+    standalone: true,
 })
 export class SidebarComponent implements OnInit{
 
