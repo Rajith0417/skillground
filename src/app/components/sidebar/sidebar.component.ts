@@ -13,6 +13,7 @@ import { VideoStoreService } from '../../services/video-store.service';
 import { Observable, combineLatest, startWith, map, BehaviorSubject } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import log from 'video.js/dist/types/utils/log';
 
 @Component({
     selector: 'app-sidebar',
@@ -41,6 +42,10 @@ export class SidebarComponent implements OnInit{
     this.loading$ = this.videoStoreService.getVideoLoading$();
     this.error$ = this.videoStoreService.getVideoError$();
     this.selectedVideoId$ = this.videoStoreService.getSelectedVideoId$();
+
+    console.log(this.videos$);
+    console.log(this.selectedVideoId$);
+
 
     // Filter videos based on search term
     this.filteredVideos$ = combineLatest([
