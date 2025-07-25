@@ -13,6 +13,6 @@ export class VideoService {
   constructor(private http: HttpClient) { }
 
   getVideos():Observable<VideoResponse>{
-    return this.http.get<VideoResponse>("/videos.json");
+    return this.http.get<VideoResponse>("assets/videos.json");
   }
 }
