@@ -1,6 +1,14 @@
-import { Component, ElementRef, Input, input, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  input,
+  OnInit,
+  ViewChild,
+  OnDestroy,
+} from '@angular/core';
 import { Video } from '../models/video.model';
-import videojs from 'video.js'
+import videojs from 'video.js';
 import type Player from 'video.js/dist/types/player';
 import { VideoStoreService } from '../../services/video-store.service';
 import { Observable, Subscription } from 'rxjs';
@@ -9,14 +17,13 @@ import { ActivatedRoute } from '@angular/router';
 import log from 'video.js/dist/types/utils/log';
 
 @Component({
-    selector: 'app-videoplayer',
-    imports: [CommonModule],
-    templateUrl: './videoplayer.component.html',
-    styleUrl: './videoplayer.component.scss',
-    standalone: true,
+  selector: 'app-videoplayer',
+  imports: [CommonModule],
+  templateUrl: './videoplayer.component.html',
+  styleUrl: './videoplayer.component.scss',
+  standalone: true,
 })
-export class VideoplayerComponent implements OnInit, OnDestroy{
-
+export class VideoplayerComponent implements OnInit, OnDestroy {
   player!: Player;
   @ViewChild('target', { static: false }) target!: ElementRef<HTMLVideoElement>;
   private routeSub!: Subscription;
@@ -25,36 +32,35 @@ export class VideoplayerComponent implements OnInit, OnDestroy{
   constructor(
     private videoStoreService: VideoStoreService,
     private route: ActivatedRoute
-  ){}
+  ) {}
 
   ngOnInit(): void {
-
     // Subscribe to route params and select video if id is present
-    this.routeSub = this.route.params.subscribe(params => {
+    this.routeSub = this.route.params.subscribe((params) => {
       const id = params['id'];
       if (id) {
         this.videoStoreService.clearSelectedVideo();
         this.videoStoreService.selectVideo(id);
         this.selectedVideo$ = this.videoStoreService.getSelectedVideo$();
+        // this.selectedVideo$ = this.videoStoreService.getSelectedVideo$();
+        this.selectedVideo$.subscribe((video) => {
+          if (video && this.target?.nativeElement) {
+            const videoEl = this.target.nativeElement;
+
+            // pause if playing
+            videoEl.pause();
+
+            // reload video with new sources
+            videoEl.load();
+
+            // play automatically
+            // videoEl.play();
+          }
+        });
       } else {
         this.videoStoreService.clearSelectedVideo();
       }
     });
-    // this.selectedVideo$ = this.videoStoreService.getSelectedVideo$();
-    this.selectedVideo$.subscribe(video => {
-    if (video && this.target?.nativeElement) {
-      const videoEl = this.target.nativeElement;
-
-      // pause if playing
-      videoEl.pause();
-
-      // reload video with new sources
-      videoEl.load();
-
-      // play automatically
-      // videoEl.play();
-    }
-  });
   }
 
   ngAfterViewInit(): void {
