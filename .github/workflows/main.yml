@@ -47,4 +47,4 @@ jobs:
 
       - name: 📤 Deploy to S3 
         run: |
-          aws s3 sync dist/skillground/browser s3://skillground-rajith-angular --delete
+          aws s3 sync dist/skillground/browser s3://skillground-angular-rajith --delete
