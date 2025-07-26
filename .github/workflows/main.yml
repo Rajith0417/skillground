@@ -28,15 +28,15 @@ jobs:
       #   continue-on-error: false  # Fail the workflow if tests fail
 
       - name: 🛠️ Build Angular app
-        run: npm run build -- --configuration production --base-href=/skillground/
-        # run: npm run build -- --configuration production --base-href=/
+        # run: npm run build -- --configuration production --base-href=/skillground/
+        run: npm run build -- --configuration production --base-href=/
         
-      - name: 🚀 Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages           # The branch the action should deploy to.
-          folder: dist/skillground/browser  # The folder the action should deploy.
-          token: ${{ secrets.noexpire }}
+      # - name: 🚀 Deploy to GitHub Pages
+      #   uses: JamesIves/github-pages-deploy-action@v4
+      #   with:
+      #     branch: gh-pages           # The branch the action should deploy to.
+      #     folder: dist/skillground/browser  # The folder the action should deploy.
+      #     token: ${{ secrets.noexpire }}
 
       - name: ☁️ Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
