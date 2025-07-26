@@ -28,8 +28,8 @@ jobs:
       #   continue-on-error: false  # Fail the workflow if tests fail
 
       - name: 🛠️ Build Angular app
-        run: npm run build -- --configuration production --base-href=/skillground/
-        # run: npm run build -- --configuration production --base-href=/
+        # run: npm run build -- --configuration production --base-href=/skillground/ #for github
+        run: npm run build -- --configuration production --base-href=/ #for aws - 
         
       # - name: 🚀 Deploy to GitHub Pages
       #   uses: JamesIves/github-pages-deploy-action@v4
